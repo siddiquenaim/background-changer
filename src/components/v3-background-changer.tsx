@@ -1,6 +1,7 @@
 import { CanvasNode, framer } from "framer-plugin";
 import { useEffect, useState } from "react";
 import { ColorInput3 } from "./color-input-v3"; // The updated RGBA color picker
+import { getNodesWithBackgroundColor } from "../utils/utils";
 
 // Show the UI at the top right of the canvas
 framer.showUI({
@@ -20,10 +21,29 @@ function useSelection() {
   return selection;
 }
 
-// Function to get all nodes with a background color
-async function getNodesWithBackgroundColor() {
-  const nodesWithBg = await framer.getNodesWithAttribute("backgroundColor");
-  return nodesWithBg || []; // Return empty array if no nodes found
+// Utility function to normalize colors to full hex or rgba format
+function normalizeColor(color: string | undefined): string {
+  if (!color) {
+    return "rgba(255, 255, 255, 1)"; // Fallback to white if color is undefined
+  }
+
+  // Handle named colors (e.g., "white")
+  if (color.toLowerCase() === "white") return "rgba(255, 255, 255, 1)";
+
+  // Convert shorthand hex (#RGB) to full hex (#RRGGBB)
+  if (color.startsWith("#") && color.length === 4) {
+    const r = color[1];
+    const g = color[2];
+    const b = color[3];
+    return `#${r}${r}${g}${g}${b}${b}`;
+  }
+
+  // Convert to rgba if it's already a valid rgba() or rgb() string
+  if (color.startsWith("rgb")) {
+    return color; // Already in rgb/rgba format
+  }
+
+  return color; // Return the color as is (full hex or valid color)
 }
 
 export function BackgroundChanger3() {
@@ -43,12 +63,12 @@ export function BackgroundChanger3() {
         selection.some((selNode) => selNode.id === node.id)
       );
 
-      // Group nodes by their background color (now in RGBA or HEX)
+      // Group nodes by their background color
       const colorGroups = selectedNodes.reduce<
         { color: string; nodes: CanvasNode[] }[]
       >((acc, node) => {
-        const color =
-          node.backgroundColor?.toString() || "rgba(255, 255, 255, 1)"; // Default white color in RGBA
+        const rawColor = node.backgroundColor?.toString();
+        const color = normalizeColor(rawColor); // Normalize color with fallback
 
         const existingGroup = acc.find((group) => group.color === color);
         if (existingGroup) {
