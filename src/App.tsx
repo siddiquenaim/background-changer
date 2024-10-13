@@ -2,13 +2,13 @@ import "@radix-ui/themes/styles.css";
 import { framer } from "framer-plugin";
 import "./App.css";
 
-import { BackgroundChanger2 } from "./components/v2/v2-background-changer";
+import { BackgroundChanger2 } from "./components/v2-background-changer";
 
 import.meta.hot?.accept(() => {
   import.meta.hot?.invalidate();
 });
 
-void framer.showUI({ position: "top right", width: 280, height: 400 });
+void framer.showUI({ position: "top right", width: 280, height: 240 });
 
 export function App() {
   return (

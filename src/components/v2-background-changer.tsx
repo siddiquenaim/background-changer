@@ -1,7 +1,7 @@
 import { CanvasNode, framer } from "framer-plugin";
 import { useEffect, useState } from "react";
 
-import { getNodesWithBackgroundColor, toFullHexColor } from "../../utils/utils";
+import { getNodesWithBackgroundColor, toFullHexColor } from "../utils/utils";
 import { ColorInput } from "./color-input";
 
 // Show the UI at the top right of the canvas

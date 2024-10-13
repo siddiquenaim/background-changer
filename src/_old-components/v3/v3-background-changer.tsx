@@ -1,7 +1,7 @@
 import { CanvasNode, framer } from "framer-plugin";
 import { useEffect, useState } from "react";
 import { ColorInput3 } from "./color-input-v3"; // The updated RGBA color picker
-import { getNodesWithBackgroundColor } from "../utils/utils";
+import { getNodesWithBackgroundColor } from "../../utils/utils";
 
 // Show the UI at the top right of the canvas
 framer.showUI({

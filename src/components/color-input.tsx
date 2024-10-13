@@ -1,6 +1,6 @@
 // ColorInput Component
 import { useRef, useEffect, useState } from "react";
-import { toFullHexColor } from "../../utils/utils";
+import { toFullHexColor } from "../utils/utils";
 
 export function ColorInput({
   value,

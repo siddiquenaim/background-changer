@@ -1,6 +1,6 @@
 import { CanvasNode, framer } from "framer-plugin";
 import { useEffect, useState } from "react";
-import { ColorInput } from "../v2/color-input";
+import { ColorInput } from "../../components/color-input";
 
 framer.showUI({
   position: "top right",
