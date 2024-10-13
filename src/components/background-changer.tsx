@@ -22,7 +22,7 @@ function useSelection() {
   return selection;
 }
 
-export function BackgroundChanger2() {
+export function BackgroundChanger() {
   const selection = useSelection();
   const layer = selection.length === 1 ? "layer" : "layers";
   const [groupedColors, setGroupedColors] = useState<
@@ -100,7 +100,7 @@ export function BackgroundChanger2() {
 
         {groupedColors.length > 0 && (
           <div className="color-list">
-            <h4>Grouped Colors:</h4>
+            <h4>Selection Colors:</h4>
             <ul>
               {groupedColors.map((group, index) => (
                 <li key={index} style={{ marginBottom: "10px" }}>
